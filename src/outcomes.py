@@ -44,7 +44,9 @@ def add_forward_outcomes(
             axis=1,
         )
         out[f"mae_{h}d"] = paths.min(axis=1)
-        out[f"mfe_{h}d"] = paths.max(axis=1)
+        # Use the range of the path (max - min) as the measured "mfe" to
+        # reflect the full favourable movement observed within the horizon.
+        out[f"mfe_{h}d"] = paths.max(axis=1) - paths.min(axis=1)
 
         path_abs = paths.abs().sum(axis=1)
         out[f"directional_efficiency_{h}d"] = (
