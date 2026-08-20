@@ -21,4 +21,10 @@ def test_mae_mfe_are_forward_only():
     df = pd.DataFrame({"close": [100., 110., 90., 120.]})
     result = add_forward_outcomes(df, horizons=(2,))
     assert np.isclose(result.loc[0, "mae_2d"], -0.10)
-    assert np.isclose(result.loc[0, "mfe_2d"], 0.20)
+    assert np.isclose(result.loc[0, "mfe_2d"], 0.10)
+
+def test_mfe_is_max_gain_from_entry_not_path_range():
+    df = pd.DataFrame({"close": [100., 80., 95.]})
+    result = add_forward_outcomes(df, horizons=(2,))
+    assert np.isclose(result.loc[0, "mae_2d"], -0.20)
+    assert np.isclose(result.loc[0, "mfe_2d"], -0.05)
