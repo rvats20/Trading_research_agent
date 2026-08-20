@@ -10,6 +10,7 @@ class DataSnapshot:
     rows: int
     start: str
     end: str
+    
     sha256: str
 
 def load_ohlcv(path: str) -> tuple[pd.DataFrame, DataSnapshot]:
