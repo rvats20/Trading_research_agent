@@ -6,6 +6,9 @@ Greenfield research slice for testing:
 
 This implementation is deliberately research-first. It does not optimize a trading strategy or connect to a broker.
 
+This is a financial research framework for testing whether volatility contraction in the NIFTY index contains predictive signal about future directional movement. It's a pure research tool (not a trading bot) that validates hypotheses using statistical testing.
+
+
 ## Inputs
 
 A CSV containing at minimum:
