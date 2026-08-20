@@ -18,8 +18,12 @@ def _summary(x: pd.Series) -> dict:
     }
 
 def compare_bucket(df: pd.DataFrame, mask: pd.Series, outcome: str) -> dict:
-    a = df.loc[mask, outcome].dropna()
-    b = df.loc[~mask, outcome].dropna()
+    valid_mask = mask.notna()
+    contraction_mask = mask.fillna(False).astype(bool)
+    non_contraction_mask = valid_mask & ~contraction_mask
+
+    a = df.loc[contraction_mask, outcome].dropna()
+    b = df.loc[non_contraction_mask, outcome].dropna()
     result = {
         "contraction": _summary(a),
         "non_contraction": _summary(b),
@@ -31,8 +35,10 @@ def compare_bucket(df: pd.DataFrame, mask: pd.Series, outcome: str) -> dict:
     else:
         result["welch_t"] = None
         result["p_value"] = None
-    if len(a):
+    if len(a) and len(b):
         result["mean_difference"] = float(a.mean() - b.mean())
+    else:
+        result["mean_difference"] = None
     return result
 
 def evaluate(df: pd.DataFrame) -> dict:
@@ -47,7 +53,8 @@ def evaluate(df: pd.DataFrame) -> dict:
     ]
     for feature in definitions:
         for threshold in [0.10, 0.20, 0.30]:
-            mask = df[feature] <= threshold
+            feature_values = df[feature]
+            mask = (feature_values <= threshold).where(feature_values.notna())
             for h in [1, 3, 5, 10, 20]:
                 outcome = f"fwd_return_{h}d"
                 r = compare_bucket(df, mask, outcome)
