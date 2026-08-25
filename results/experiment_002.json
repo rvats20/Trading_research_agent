@@ -1,0 +1,92 @@
+{
+  "experiment_id": "EXP-002",
+  "preregistration": "See .hermes/plans/2026-08-25_exp002-bb-squeeze-validation.md",
+  "signal_params": {
+    "bb_pct_window": 20,
+    "bb_threshold": 0.1,
+    "rv_min_periods": 120
+  },
+  "data_snapshot": {
+    "rows": 1241,
+    "start": "2021-08-24T00:00:00+00:00",
+    "end": "2026-08-24T00:00:00+00:00",
+    "sha256": "6bc8596256086fc5fb50e00fd20224de72091ffb89e0e072ffe42f92cbbce29d"
+  },
+  "folds": [
+    {
+      "year": 2021,
+      "n_trigger": 0,
+      "mean_trigger": null,
+      "p_neg": null,
+      "n_rest": 52,
+      "mean_rest": -0.005155097073824702,
+      "welch_p_one_sided": null
+    },
+    {
+      "year": 2022,
+      "n_trigger": 12,
+      "mean_trigger": -0.02915765796019491,
+      "p_neg": 0.6666666666666666,
+      "n_rest": 248,
+      "mean_rest": 0.00212043812820807,
+      "welch_p_one_sided": 0.04158873180892103
+    },
+    {
+      "year": 2023,
+      "n_trigger": 0,
+      "mean_trigger": null,
+      "p_neg": null,
+      "n_rest": 246,
+      "mean_rest": 0.01564452770547743,
+      "welch_p_one_sided": null
+    },
+    {
+      "year": 2024,
+      "n_trigger": 8,
+      "mean_trigger": 0.001802598941676295,
+      "p_neg": 0.5,
+      "n_rest": 249,
+      "mean_rest": 0.0067125285720169795,
+      "welch_p_one_sided": 0.29017341988597556
+    },
+    {
+      "year": 2025,
+      "n_trigger": 24,
+      "mean_trigger": 0.005844815036294235,
+      "p_neg": 0.375,
+      "n_rest": 249,
+      "mean_rest": 0.007852007356593093,
+      "welch_p_one_sided": 0.3577773201324061
+    },
+    {
+      "year": 2026,
+      "n_trigger": 25,
+      "mean_trigger": -0.0319189230844913,
+      "p_neg": 0.6,
+      "n_rest": 139,
+      "mean_rest": -0.0063702896033499875,
+      "welch_p_one_sided": 0.013252613938192746
+    }
+  ],
+  "pooled": {
+    "n_trigger": 69,
+    "mean_trigger": -0.014393748119277527,
+    "one_sided_p": 0.0001255165708799442
+  },
+  "backtest_summary": {
+    "n_trades": 69,
+    "win_rate": 0.463768115942029,
+    "avg_net": -0.01466468115942029,
+    "median_net": -0.00439,
+    "total_return_compound": -0.6630412501755687,
+    "max_drawdown": -0.6793779411117673,
+    "cost_per_trade": 0.0005,
+    "horizon_days": 20
+  },
+  "verdict": {
+    "H1": "True",
+    "H2": "False",
+    "H3": false,
+    "decision": "SIGNAL NOT VALIDATED"
+  }
+}
