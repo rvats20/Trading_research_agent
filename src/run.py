@@ -12,6 +12,10 @@ def main():
     p.add_argument("--output", default="results/experiment_001.json")
     args = p.parse_args()
 
+    data_path = Path(args.data)
+    if not data_path.is_file():
+        p.error(f"--data file not found: {data_path}")
+
     df, snapshot = load_ohlcv(args.data)
     df = add_volatility_features(df)
     df = add_forward_outcomes(df)

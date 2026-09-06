@@ -42,15 +42,22 @@ def compare_bucket(df: pd.DataFrame, mask: pd.Series, outcome: str) -> dict:
     return result
 
 def evaluate(df: pd.DataFrame) -> dict:
-    tests = []
-    definitions = [
+    required = {
         "atr_pct_price_pct_20",
         "atr_pct_price_pct_60",
         "realized_vol_20_pct_20",
         "realized_vol_20_pct_60",
         "bb_width_20_pct_20",
         "bb_width_20_pct_60",
-    ]
+    }
+    missing = sorted(required - set(df.columns))
+    if missing:
+        raise ValueError(
+            f"evaluate() missing required columns: {missing}. "
+            "Run add_volatility_features() before evaluate()."
+        )
+    tests = []
+    definitions = sorted(required)
     for feature in definitions:
         for threshold in [0.10, 0.20, 0.30]:
             feature_values = df[feature]

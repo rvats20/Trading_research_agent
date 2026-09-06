@@ -35,8 +35,11 @@ def add_forward_outcomes(
             [log_returns.shift(-i) for i in range(1, h + 1)],
             axis=1,
         )
+        # ddof=1 needs >=2 values; a single forward return (h=1) has
+        # only one value, so use the population std (ddof=0) there.
+        ddof = 0 if h == 1 else 1
         out[f"future_vol_{h}d"] = (
-            forward_returns.std(axis=1, ddof=1) * np.sqrt(252)
+            forward_returns.std(axis=1, ddof=ddof) * np.sqrt(252)
         )
 
         paths = pd.concat(
